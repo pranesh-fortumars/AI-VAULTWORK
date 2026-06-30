@@ -1,23 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Login from './pages/Login';
-
-// Placeholder for the main dashboard layout
-function Dashboard() {
-  const { currentUser, signOut } = useAuth();
-  return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">VaultWork Dashboard</h1>
-      <p>Welcome, {currentUser?.email}</p>
-      <button 
-        onClick={signOut}
-        className="mt-4 px-4 py-2 bg-destructive text-destructive-foreground rounded-lg"
-      >
-        Sign Out
-      </button>
-    </div>
-  );
-}
+import DashboardLayout from './layouts/DashboardLayout';
+import Dashboard from './pages/Dashboard';
 
 // Protected Route Wrapper
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -36,10 +21,13 @@ function AppRoutes() {
         path="/" 
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <DashboardLayout />
           </ProtectedRoute>
-        } 
-      />
+        }
+      >
+        <Route index element={<Dashboard />} />
+        {/* We will add more nested routes here like /projects, /tasks */}
+      </Route>
     </Routes>
   );
 }
