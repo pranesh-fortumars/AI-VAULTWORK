@@ -3,6 +3,8 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Login from './pages/Login';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
+import Projects from './pages/Projects';
+import ProjectDetails from './pages/ProjectDetails';
 
 // Protected Route Wrapper
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -26,7 +28,8 @@ function AppRoutes() {
         }
       >
         <Route index element={<Dashboard />} />
-        {/* We will add more nested routes here like /projects, /tasks */}
+        <Route path="projects" element={<Projects />} />
+        <Route path="projects/:id" element={<ProjectDetails />} />
       </Route>
     </Routes>
   );
