@@ -1,15 +1,43 @@
-import { Activity, Users, FolderKanban, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Activity, Users, FolderKanban, CheckCircle2, Loader2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+  const [stats, setStats] = useState<any[]>([]);
 
-  const stats = [
-    { label: 'Active Projects', value: '12', icon: FolderKanban, trend: '+2 this week', color: 'text-blue-500' },
-    { label: 'Tasks Completed', value: '64', icon: CheckCircle2, trend: '+14% vs last week', color: 'text-green-500' },
-    { label: 'Team Members', value: '28', icon: Users, trend: '2 online now', color: 'text-purple-500' },
-    { label: 'Productivity Score', value: '92%', icon: Activity, trend: 'Top 10%', color: 'text-orange-500' },
-  ];
+  useEffect(() => {
+    // Simulate API fetch delay for polish
+    const loadData = async () => {
+      try {
+        // In a real app, this would be: await fetchWithAuth('/projects/stats');
+        setTimeout(() => {
+          setStats([
+            { label: 'Active Projects', value: '0', icon: FolderKanban, trend: 'New workspace', color: 'text-blue-500' },
+            { label: 'Tasks Completed', value: '0', icon: CheckCircle2, trend: 'Let\'s get started', color: 'text-green-500' },
+            { label: 'Team Members', value: '1', icon: Users, trend: 'Just you', color: 'text-purple-500' },
+            { label: 'Productivity Score', value: '-', icon: Activity, trend: 'No data yet', color: 'text-orange-500' },
+          ]);
+          setIsLoading(false);
+        }, 1000);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="h-full flex flex-col items-center justify-center text-muted-foreground animate-in fade-in duration-500">
+        <Loader2 className="w-10 h-10 animate-spin text-purple-500 mb-4" />
+        <p className="font-medium">Loading workspace...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
