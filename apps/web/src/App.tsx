@@ -5,6 +5,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
+import Messages from './pages/Messages';
 
 // Protected Route Wrapper
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -30,6 +31,7 @@ function AppRoutes() {
         <Route index element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
         <Route path="projects/:id" element={<ProjectDetails />} />
+        <Route path="messages" element={<Messages />} />
       </Route>
     </Routes>
   );
