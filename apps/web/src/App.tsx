@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Messages from './pages/Messages';
+import UserProfile from './pages/UserProfile';
 import Users from './pages/Users';
 import CommunityLayout from './layouts/CommunityLayout';
 import CommunityHome from './pages/community/CommunityHome';
@@ -15,6 +16,7 @@ import CommunityDashboard from './pages/community/CommunityDashboard';
 import CommunityDetail from './pages/community/CommunityDetail';
 import CareerHub from './pages/community/CareerHub';
 import AIAssistant from './pages/community/AIAssistant';
+import CommunityProfile from './pages/community/CommunityProfile';
 
 // Protected Route Wrapper
 import PendingApproval from './pages/PendingApproval';
@@ -64,6 +66,7 @@ function AppRoutes() {
         <Route path="projects/:id" element={<ProjectDetails />} />
         <Route path="messages" element={<Messages />} />
         <Route path="users" element={<Users />} />
+        <Route path="profile" element={<UserProfile />} />
       </Route>
 
       <Route 
@@ -78,6 +81,7 @@ function AppRoutes() {
         <Route path="explore" element={<CommunityHome />} />
         <Route path="career" element={<CareerHub />} />
         <Route path="ai" element={<AIAssistant />} />
+        <Route path="profile" element={<CommunityProfile />} />
         <Route path=":id" element={<CommunityDetail />} />
       </Route>
 

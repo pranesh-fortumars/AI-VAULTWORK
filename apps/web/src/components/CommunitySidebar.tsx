@@ -10,7 +10,8 @@ import {
   Calendar, 
   Bot,
   Settings,
-  MessageSquare
+  MessageSquare,
+  User
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -26,6 +27,7 @@ export default function CommunitySidebar() {
     { name: 'Career Hub', path: '/community/career', icon: Briefcase },
     { name: 'Library', path: '/community/library', icon: BookOpen },
     { name: 'Events', path: '/community/events', icon: Calendar },
+    { name: 'Member Profile', path: '/community/profile', icon: User },
     { name: 'AI Assistant', path: '/community/ai', icon: Bot },
   ];
 
