@@ -1,11 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Messages from './pages/Messages';
+import Users from './pages/Users';
 
 // Protected Route Wrapper
 import PendingApproval from './pages/PendingApproval';
@@ -21,6 +24,14 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return <Navigate to="/login" replace />;
   }
 
+  // Enforce email verification (if requested)
+  if (!currentUser.emailVerified) {
+    return <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
+      <h2 className="text-2xl font-bold mb-4">Please verify your email</h2>
+      <p className="text-muted-foreground max-w-md">We sent a verification link to {currentUser.email}. Please check your inbox and click the link to continue.</p>
+    </div>;
+  }
+
   if (userProfile && userProfile.status === 'Pending') {
     return <PendingApproval />;
   }
@@ -31,9 +42,11 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route 
-        path="/" 
+        path="/dashboard" 
         element={
           <ProtectedRoute>
             <DashboardLayout />
@@ -44,7 +57,9 @@ function AppRoutes() {
         <Route path="projects" element={<Projects />} />
         <Route path="projects/:id" element={<ProjectDetails />} />
         <Route path="messages" element={<Messages />} />
+        <Route path="users" element={<Users />} />
       </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

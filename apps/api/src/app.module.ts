@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProjectsModule } from './projects/projects.module';
@@ -7,10 +8,18 @@ import { ChatGateway } from './chat/chat.gateway';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
+import { AuditInterceptor } from './common/interceptors/audit.interceptor';
 
 @Module({
   imports: [ProjectsModule, TasksModule, UsersModule, RolesModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService, ChatGateway],
+  providers: [
+    AppService, 
+    ChatGateway,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuditInterceptor,
+    }
+  ],
 })
 export class AppModule {}

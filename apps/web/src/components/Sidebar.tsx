@@ -22,13 +22,13 @@ export default function Sidebar() {
   };
 
   const allNavItems = [
-    { name: 'Dashboard', path: '/', icon: LayoutDashboard },
-    { name: 'Projects', path: '/projects', icon: FolderKanban, requiredPermissions: ['projects:view'] },
-    { name: 'Tasks', path: '/tasks', icon: CheckSquare, requiredPermissions: ['tasks:view'] },
-    { name: 'Messages', path: '/messages', icon: MessageSquare, requiredPermissions: ['messages:view'] },
-    { name: 'Meetings', path: '/meetings', icon: Video, requiredPermissions: ['meetings:view'] },
-    { name: 'Files', path: '/files', icon: Files, requiredPermissions: ['files:view'] },
-    { name: 'Users', path: '/users', icon: Vault, requiredPermissions: ['users:manage'] },
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'Projects', path: '/dashboard/projects', icon: FolderKanban, requiredPermissions: ['projects:view'] },
+    { name: 'Tasks', path: '/dashboard/tasks', icon: CheckSquare, requiredPermissions: ['tasks:view'] },
+    { name: 'Messages', path: '/dashboard/messages', icon: MessageSquare, requiredPermissions: ['messages:view'] },
+    { name: 'Meetings', path: '/dashboard/meetings', icon: Video, requiredPermissions: ['meetings:view'] },
+    { name: 'Files', path: '/dashboard/files', icon: Files, requiredPermissions: ['files:view'] },
+    { name: 'Users', path: '/dashboard/users', icon: Vault, requiredPermissions: ['users:manage'] },
   ];
 
   const navItems = allNavItems.filter(item => hasPermission(item.requiredPermissions));
@@ -68,7 +68,7 @@ export default function Sidebar() {
       {/* Bottom Actions */}
       <div className="p-4 border-t border-border/50 space-y-1">
         <NavLink
-          to="/settings"
+          to="/dashboard/settings"
           className={({ isActive }) =>
             `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
               isActive

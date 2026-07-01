@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Mail, Lock, LogIn, ArrowRight, UserPlus } from 'lucide-react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
 
 export default function Login() {
-  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,14 +16,10 @@ export default function Login() {
     try {
       setError('');
       setLoading(true);
-      if (isSignUp) {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
+      await signInWithEmailAndPassword(auth, email, password);
       // Redirect handled by protected route wrapper later
     } catch (err: any) {
-      setError(`Failed to ${isSignUp ? 'create account' : 'log in'}: ${err.message}`);
+      setError(`Failed to log in: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -51,13 +46,13 @@ export default function Login() {
       <div className="relative z-10 w-full max-w-md p-8 md:p-10 bg-card/80 backdrop-blur-xl border border-border/50 shadow-2xl rounded-3xl">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-blue-500 mb-6 shadow-lg shadow-purple-500/30">
-            {isSignUp ? <UserPlus className="text-white w-8 h-8" /> : <LogIn className="text-white w-8 h-8" />}
+            <LogIn className="text-white w-8 h-8" />
           </div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground mb-2">
-            {isSignUp ? 'Create an Account' : 'Welcome to VaultWork'}
+            Welcome to VaultWork
           </h1>
           <p className="text-muted-foreground">
-            {isSignUp ? 'Sign up to join your secure workspace' : 'Sign in to access your secure workspace'}
+            Sign in to access your secure workspace
           </p>
         </div>
 
@@ -86,11 +81,9 @@ export default function Login() {
           <div className="space-y-2">
             <div className="flex justify-between items-center ml-1">
               <label className="text-sm font-medium text-foreground">Password</label>
-              {!isSignUp && (
-                <a href="#" className="text-sm font-medium text-purple-500 hover:text-purple-400 transition-colors">
-                  Forgot password?
-                </a>
-              )}
+              <a href="#" className="text-sm font-medium text-purple-500 hover:text-purple-400 transition-colors">
+                Forgot password?
+              </a>
             </div>
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -112,23 +105,19 @@ export default function Login() {
             className="group relative w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-foreground hover:bg-foreground/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
           >
             <span className="relative z-10 flex items-center">
-              {isSignUp ? 'Sign Up' : 'Sign In'}
+              Sign In
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </button>
         </form>
 
         <div className="mt-6 text-center">
-          <button 
-            onClick={() => {
-              setIsSignUp(!isSignUp);
-              setError('');
-            }}
-            type="button"
+          <a 
+            href="/register"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
-          </button>
+            Don't have an account? Sign up
+          </a>
         </div>
 
         <div className="mt-8">
