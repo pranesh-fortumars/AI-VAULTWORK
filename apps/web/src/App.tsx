@@ -8,11 +8,23 @@ import ProjectDetails from './pages/ProjectDetails';
 import Messages from './pages/Messages';
 
 // Protected Route Wrapper
+import PendingApproval from './pages/PendingApproval';
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { currentUser } = useAuth();
+  const { currentUser, userProfile, loading } = useAuth();
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+
   if (!currentUser) {
     return <Navigate to="/login" replace />;
   }
+
+  if (userProfile && userProfile.status === 'Pending') {
+    return <PendingApproval />;
+  }
+
   return <>{children}</>;
 }
 

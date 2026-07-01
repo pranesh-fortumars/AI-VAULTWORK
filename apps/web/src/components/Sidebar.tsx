@@ -13,16 +13,25 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Sidebar() {
-  const { signOut } = useAuth();
+  const { signOut, userProfile } = useAuth();
+  
+  const hasPermission = (requiredPermissions?: string[]) => {
+    if (!requiredPermissions || requiredPermissions.length === 0) return true;
+    if (userProfile?.permissions?.includes('*')) return true;
+    return requiredPermissions.some(p => userProfile?.permissions?.includes(p));
+  };
 
-  const navItems = [
+  const allNavItems = [
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
-    { name: 'Projects', path: '/projects', icon: FolderKanban },
-    { name: 'Tasks', path: '/tasks', icon: CheckSquare },
-    { name: 'Messages', path: '/messages', icon: MessageSquare },
-    { name: 'Meetings', path: '/meetings', icon: Video },
-    { name: 'Files', path: '/files', icon: Files },
+    { name: 'Projects', path: '/projects', icon: FolderKanban, requiredPermissions: ['projects:view'] },
+    { name: 'Tasks', path: '/tasks', icon: CheckSquare, requiredPermissions: ['tasks:view'] },
+    { name: 'Messages', path: '/messages', icon: MessageSquare, requiredPermissions: ['messages:view'] },
+    { name: 'Meetings', path: '/meetings', icon: Video, requiredPermissions: ['meetings:view'] },
+    { name: 'Files', path: '/files', icon: Files, requiredPermissions: ['files:view'] },
+    { name: 'Users', path: '/users', icon: Vault, requiredPermissions: ['users:manage'] },
   ];
+
+  const navItems = allNavItems.filter(item => hasPermission(item.requiredPermissions));
 
   return (
     <aside className="w-64 h-screen bg-card border-r border-border flex flex-col hidden md:flex shrink-0">
