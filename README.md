@@ -1,159 +1,90 @@
-# Turborepo starter
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=8b5cf6&height=200&section=header&text=VaultWork&fontSize=80&fontAlignY=35&animation=twinkling&fontColor=ffffff" />
+  
+  <br />
+  
+  <a href="https://react.dev"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /></a>
+  <a href="https://nestjs.com/"><img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" /></a>
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" /></a>
+  <a href="https://firebase.google.com/"><img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" /></a>
+  
+  <br />
+  <br />
 
-This Turborepo starter is maintained by the Turborepo core team.
+  **The Zero-Trust, Enterprise-Grade Collaboration Workspace.** <br/>
+  *Featuring real-time task management, secure communications, and an interactive Community Hub.*
 
-## Using this example
+  <br />
+</div>
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
-```
+## ✨ Features
 
-## What's inside?
+VaultWork is built for modern teams that require bank-level security without sacrificing beautiful, real-time user experiences.
+
+### 🏢 Enterprise Core
+- 🛡️ **Zero-Trust RBAC**: Every action is verified against a strict permissions matrix.
+- ⚡ **Real-Time Sync**: WebSockets keep Kanbans, dashboards, and chats instantly up to date.
+- 📊 **Dynamic Workflows**: Tailor-made dashboards automatically generated based on user roles.
+
+### 🌐 Community Hub (New!)
+We recently launched the **Community Hub**, a standalone module seamlessly integrated into the VaultWork platform!
+- 🗣️ **Threaded Discussions**: Explore niche communities, join discussions, and share knowledge.
+- 💼 **Career Board**: Discover exclusive job postings, get referrals, and prepare for interviews.
+- 📚 **Resource Library**: A centralized grid for sharing PDFs, tech docs, and video tutorials.
+- 🤖 **AI Assistant**: A built-in LLM companion to help summarize threads and answer tech questions.
+- 👤 **Dynamic Member Profiles**: Track your reputation points, showcase your top skills, and view your activity timeline.
+
+---
+
+## 🚀 Getting Started
+
+This repository is structured as a [Turborepo](https://turborepo.org/) monorepo containing both the React frontend and the NestJS backend.
+
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-org/vaultwork.git
+   cd vaultwork
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development servers**
+   ```bash
+   npm run dev
+   ```
+   *This single command uses Turbo to concurrently launch the React frontend on `localhost:5173` and the NestJS API on `localhost:3000`.*
+
+---
+
+## 🏗️ Architecture
 
 This Turborepo includes the following packages/apps:
 
-### Apps and Packages
+- `apps/web`: The main frontend application built with **React**, **Vite**, and **Tailwind CSS**.
+- `apps/api`: The backend microservice built with **NestJS**, heavily utilizing WebSockets and Firebase Admin.
+- `@repo/ui`: A shared React component library for design system consistency.
+- `@repo/eslint-config`: Shared `eslint` configurations.
+- `@repo/typescript-config`: Shared `tsconfig.json`s.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+---
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## 🔒 Firebase Configuration (Local Dev)
+If you are developing locally without Firebase Service Account credentials, **do not worry!** 
+Our backend services (like `JobsService`, `CommunitiesService`, etc.) are designed to gracefully catch missing credentials and fallback to **Mock Data Mode**. This means you can build, test, and design the UI without needing cloud access.
 
-### Utilities
+<br />
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo build
-npm dlx turbo build
-npm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo build --filter=docs
-npm exec turbo build --filter=docs
-npm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-npm exec turbo dev
-npm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-npm exec turbo dev --filter=web
-npm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-npm exec turbo login
-npm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-npm exec turbo link
-npm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+<div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=8B5CF6&center=true&vCenter=true&width=435&lines=Built+with+%E2%9D%A4%EF%B8%8F+by+the+VaultWork+Team;Secure.+Fast.+Beautiful." alt="Typing SVG" />
+</div>
