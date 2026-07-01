@@ -8,7 +8,8 @@ import {
   Files, 
   Settings,
   LogOut,
-  Vault
+  Vault,
+  Globe2
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -29,6 +30,7 @@ export default function Sidebar() {
     { name: 'Meetings', path: '/dashboard/meetings', icon: Video, requiredPermissions: ['meetings:view'] },
     { name: 'Files', path: '/dashboard/files', icon: Files, requiredPermissions: ['files:view'] },
     { name: 'Users', path: '/dashboard/users', icon: Vault, requiredPermissions: ['users:manage'] },
+    { name: 'Community Hub', path: '/community', icon: Globe2, isModule: true } // New Standalone Module
   ];
 
   const navItems = allNavItems.filter(item => hasPermission(item.requiredPermissions));
@@ -46,23 +48,34 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                isActive
-                  ? 'bg-secondary text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:bg-secondary/50 hover:text-foreground'
-              }`
-            }
-          >
-            <item.icon className="w-5 h-5" />
-            {item.name}
-          </NavLink>
-        ))}
+      <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto custom-scrollbar">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              end={item.path === '/dashboard'} // Since everything else is nested
+              className={({ isActive }) =>
+                `group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  isActive
+                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/20'
+                    : item.isModule 
+                      ? 'text-purple-400 hover:bg-purple-500/10 hover:text-purple-300'
+                      : 'text-muted-foreground hover:bg-secondary/50 hover:text-foreground'
+                }`
+              }
+            >
+              <div className="flex items-center gap-3">
+                <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${item.isModule ? 'text-purple-500 group-hover:text-purple-400' : ''}`} />
+                {item.name}
+              </div>
+              {item.isModule && (
+                <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+              )}
+            </NavLink>
+          );
+        })}
       </nav>
 
       {/* Bottom Actions */}

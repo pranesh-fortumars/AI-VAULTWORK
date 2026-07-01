@@ -9,6 +9,12 @@ import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Messages from './pages/Messages';
 import Users from './pages/Users';
+import CommunityLayout from './layouts/CommunityLayout';
+import CommunityHome from './pages/community/CommunityHome';
+import CommunityDashboard from './pages/community/CommunityDashboard';
+import CommunityDetail from './pages/community/CommunityDetail';
+import CareerHub from './pages/community/CareerHub';
+import AIAssistant from './pages/community/AIAssistant';
 
 // Protected Route Wrapper
 import PendingApproval from './pages/PendingApproval';
@@ -59,6 +65,22 @@ function AppRoutes() {
         <Route path="messages" element={<Messages />} />
         <Route path="users" element={<Users />} />
       </Route>
+
+      <Route 
+        path="/community" 
+        element={
+          <ProtectedRoute>
+            <CommunityLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<CommunityDashboard />} />
+        <Route path="explore" element={<CommunityHome />} />
+        <Route path="career" element={<CareerHub />} />
+        <Route path="ai" element={<AIAssistant />} />
+        <Route path=":id" element={<CommunityDetail />} />
+      </Route>
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

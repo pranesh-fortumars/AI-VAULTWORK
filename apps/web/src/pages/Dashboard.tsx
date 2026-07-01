@@ -53,10 +53,14 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex gap-3">
-          <button className="px-4 py-2 bg-secondary text-foreground hover:bg-secondary/80 rounded-lg font-medium text-sm transition-colors border border-border">
-            View Schedule
+          <button 
+            onClick={() => window.location.href='/community'}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:opacity-90 rounded-lg font-medium text-sm transition-all shadow-lg shadow-purple-500/20"
+          >
+            <Users className="w-4 h-4" />
+            Enter Community Hub
           </button>
-          <button className="px-4 py-2 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium text-sm transition-colors shadow-lg shadow-purple-500/10">
+          <button className="px-4 py-2 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium text-sm transition-colors shadow-sm">
             Create Task
           </button>
         </div>

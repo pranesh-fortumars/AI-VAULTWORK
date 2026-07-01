@@ -9,9 +9,14 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { AuditInterceptor } from './common/interceptors/audit.interceptor';
+import { CommunitiesModule } from './communities/communities.module';
+import { DiscussionsModule } from './discussions/discussions.module';
+import { JobsModule } from './jobs/jobs.module';
+import { ResourcesModule } from './resources/resources.module';
+import { AiModule } from './ai/ai.module';
 
 @Module({
-  imports: [ProjectsModule, TasksModule, UsersModule, RolesModule, AuthModule],
+  imports: [ProjectsModule, TasksModule, UsersModule, RolesModule, AuthModule, CommunitiesModule, DiscussionsModule, JobsModule, ResourcesModule, AiModule],
   controllers: [AppController],
   providers: [
     AppService, 
